@@ -1,0 +1,20 @@
+{
+  "name": "robq/flotchartbundle",
+  "description": "Chart-Bundle for Flot js Framework",
+  "homepage": "https://github.com/Rob-Q/FlotChartBundle",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Robert Queck",
+      "email": "robert@rob-q.de",
+      "homepage": "http://rob-q.de"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0"
+  },
+  "autoload": {
+    "psr-0": {"RobQ\\FlotChartBundle": "src/"}
+  }
+}

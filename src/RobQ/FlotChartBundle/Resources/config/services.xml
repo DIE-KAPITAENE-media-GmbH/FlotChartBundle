@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+		<service id="robq_flotchart.creator" class="RobQ\FlotChartBundle\Creator\ChartDataCreator">
+            <argument type="collection">
+                <argument key="line" type="service" id="robq_flotchart.linechart" />
+                <argument key="bar" type="service" id="robq_flotchart.barchart" />
+                <argument key="point" type="service" id="robq_flotchart.pointchart" />
+            </argument>
+        </service>
+
+        <service id="robq_flotchart.linechart" class="RobQ\FlotChartBundle\Charts\LineChart" />
+
+        <service id="robq_flotchart.barchart" class="RobQ\FlotChartBundle\Charts\BarChart" />
+
+        <service id="robq_flotchart.pointchart" class="RobQ\FlotChartBundle\Charts\PointChart" />
+
+
+        <service id="twig.extension.flotchart" class="RobQ\FlotChartBundle\Twig\Extension" public="false">
+            <tag name="twig.extension" />
+            <argument type="service" id="service_container" />
+        </service>
+
+    </services>
+
+</container>

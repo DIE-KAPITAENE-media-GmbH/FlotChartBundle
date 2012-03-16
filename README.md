@@ -1,0 +1,1 @@
+Chart-Bundle for Flot js Framework
