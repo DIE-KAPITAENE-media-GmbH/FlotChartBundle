@@ -13,20 +13,23 @@ class ChartDataCreator {
         $this->charttypes = $charttypes;
     }
 
-    public function createChart($type = "line",array $dataRows) {
+    public function createChart($type = "line", array $dataRows) {
 
-        if( !$this->charttypes[$type] || !isset($this->charttypes[$type]) ) {
+        if( !isset($this->charttypes[$type]) ) {
             throw new \Exception("wrong chart type");
         }
 
         $chart = $this->charttypes[$type];
 
         $datarow_ar = array();
-        foreach($dataRows as $row)
-        {
-            $dataRow = new DataRow();
-            $dataRow->setData($row);
-            $datarow_ar[]=$dataRow;
+        foreach( $dataRows as $row ) {
+            if( $row instanceof DataRow ) {
+                $datarow_ar[] = $row;
+            } else {
+                $dataRow = new DataRow();
+                $dataRow->setData($row);
+                $datarow_ar[] = $dataRow;
+            }
         }
 
         $chart->setDataRows($datarow_ar);
