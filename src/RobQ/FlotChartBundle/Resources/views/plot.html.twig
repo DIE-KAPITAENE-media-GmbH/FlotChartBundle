@@ -1,8 +1,12 @@
-<div id="{{placeholder}}" style="width:600px;height:300px;"></div>
+<div id="{{placeholder}}" style="width:80%; height:500px"></div>
 
 <script type="text/javascript">
+
+
     $(function () {
-        $.plot($("#{{placeholder}}"),
+        var placeholder = $("#{{placeholder}}");
+
+        $.plot(placeholder,
                {{data|raw}}{% if options %},
                {{options|raw}}{% endif %});
     });
