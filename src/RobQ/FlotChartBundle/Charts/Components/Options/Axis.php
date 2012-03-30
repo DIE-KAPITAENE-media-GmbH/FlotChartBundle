@@ -48,6 +48,9 @@ class Axis {
      */
     protected $ticks = null; // either [1; 3] or [[1; "a"]; 3] or (fn= axis info -> ticks) or app. number of ticks for auto-ticks
     /**
+     * int v    successive integer value of the formated axis
+     * Axis a   Axis Object for the formated axis
+     *          setTickFormatter(" v.toFixed(a.tickDecimals) + ' %' ");
      * @var null
      */
     protected $tickFormatter = null; // fn= number -> string
@@ -406,16 +409,6 @@ class Axis {
         $this->twelveHourClock = $twelveHourClock;
     }
 
-    public function toArray() {
-        $array = array();
-        foreach( $this as $key => $value ) {
-            if( $value ) {
-                $array[$key] = is_object($value) ? $value->toArray() : $value;
-            }
-        }
-        return $array;
-    }
-
     /**
      * @return string
      */
@@ -428,5 +421,15 @@ class Axis {
      */
     public function setPosition($position) {
         $this->position = $position;
+    }
+
+    public function toArray() {
+        $array = array();
+        foreach( $this as $key => $value ) {
+            if( !is_null($value) ) {
+                $array[$key] = is_object($value) ? $value->toArray() : $value;
+            }
+        }
+        return $array;
     }
 }

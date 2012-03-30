@@ -80,6 +80,16 @@ class Grid {
     protected $hoverable = false;
 
     /**
+     * @var string
+     */
+    protected $jsClickFunction = null;
+
+    /**
+     * @var string
+     */
+    protected $jsHoverFunction = null;
+
+    /**
      * @var bool
      */
     protected $autoHighlight = true; // highlight in case mouse is near
@@ -327,10 +337,38 @@ class Grid {
         $this->mouseActiveRadius = $mouseActiveRadius;
     }
 
+    /**
+     * @return string
+     */
+    public function getJsClickFunction() {
+        return $this->jsClickFunction;
+    }
+
+    /**
+     * @param string $jsClickFunction
+     */
+    public function setJsClickFunction($jsClickFunction) {
+        $this->jsClickFunction = $jsClickFunction;
+    }
+
+    /**
+     * @return string
+     */
+    public function getJsHoverFunction() {
+        return $this->jsHoverFunction;
+    }
+
+    /**
+     * @param string $jsHoverFunction
+     */
+    public function setJsHoverFunction($jsHoverFunction) {
+        $this->jsHoverFunction = $jsHoverFunction;
+    }
+
     public function toArray() {
         $array = array();
         foreach( $this as $key => $value ) {
-            if( $value ) {
+            if( !is_null($value) && ($key!="jsClickFunction" || $key!="jsHoverFunction") ) {
                 $array[$key] = is_object($value) ? $value->toArray() : $value;
             }
         }

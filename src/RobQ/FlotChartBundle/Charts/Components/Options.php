@@ -63,6 +63,9 @@ class Options {
      * @return \RobQ\FlotChartBundle\Charts\Components\Options\Legend
      */
     public function getLegend() {
+        if( is_null($this->legend) ) {
+            $this->legend = new Legend();
+        }
         return $this->legend;
     }
 
@@ -77,6 +80,9 @@ class Options {
      * @return \RobQ\FlotChartBundle\Charts\Components\Options\Xaxis
      */
     public function getXaxis() {
+        if( is_null($this->xaxis) ) {
+            $this->xaxis = new Xaxis();
+        }
         return $this->xaxis;
     }
 
@@ -91,6 +97,9 @@ class Options {
      * @return \RobQ\FlotChartBundle\Charts\Components\Options\Yaxis
      */
     public function getYaxis() {
+        if( is_null($this->yaxis) ) {
+            $this->yaxis = new Yaxis();
+        }
         return $this->yaxis;
     }
 
@@ -105,6 +114,9 @@ class Options {
      * @return \RobQ\FlotChartBundle\Charts\Components\Options\Series
      */
     public function getSeries() {
+        if( is_null($this->series) ) {
+            $this->series = new Series();
+        }
         return $this->series;
     }
 
@@ -119,6 +131,9 @@ class Options {
      * @return \RobQ\FlotChartBundle\Charts\Components\Options\Grid
      */
     public function getGrid() {
+        if( is_null($this->grid) ) {
+            $this->grid = new Grid();
+        }
         return $this->grid;
     }
 
@@ -132,7 +147,7 @@ class Options {
     public function toArray() {
         $array = array();
         foreach( $this as $key => $value ) {
-            if( $value ) {
+            if( !is_null($value) ) {
                 $array[$key] = is_object($value) ? $value->toArray() : $value;
             }
         }

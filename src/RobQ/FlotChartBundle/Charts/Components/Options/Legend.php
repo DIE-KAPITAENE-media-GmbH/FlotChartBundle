@@ -164,7 +164,7 @@ class Legend {
     public function toArray() {
         $array = array();
         foreach( $this as $key => $value ) {
-            if( $value ) {
+            if( !is_null($value) ) {
                 $array[$key] = is_object($value) ? $value->toArray() : $value;
             }
         }

@@ -17,6 +17,11 @@ class DataRow {
     protected $data;
 
     /**
+     * @var array
+     */
+    protected $additionalData;
+
+    /**
      * @var string
      */
     protected $label;
@@ -86,7 +91,7 @@ class DataRow {
      * @param string $label
      */
     public function setLabel($label) {
-        $this->label = $label;
+        $this->label = (string)$label;
     }
 
     /**
@@ -224,10 +229,24 @@ class DataRow {
         $this->data = $data;
     }
 
+    /**
+     * @return array
+     */
+    public function getAdditionalData() {
+        return $this->additionalData;
+    }
+
+    /**
+     * @param array $additionalData
+     */
+    public function setAdditionalData($additionalData) {
+        $this->additionalData = $additionalData;
+    }
+
     public function toArray() {
         $array = array();
         foreach( $this as $key => $value ) {
-            if( $value ) {
+            if( !is_null($value) ) {
                 $array[$key] = is_object($value) ? $value->toArray() : $value;
             }
         }
