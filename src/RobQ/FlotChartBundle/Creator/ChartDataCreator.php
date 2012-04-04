@@ -36,4 +36,13 @@ class ChartDataCreator {
 
         return $chart;
     }
+
+    public function setPropertyToAllDataRows($chart,array $propertyData)
+    {
+        foreach ($chart->getDataRows() as $row)
+        {
+            $method = "set".key($propertyData);
+            $row->$method(current($propertyData));
+        }
+    }
 }

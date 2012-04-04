@@ -8,4 +8,9 @@ class PluginExtends
     {
 
     }
+
+    public function getEvents()
+    {
+
+    }
 }

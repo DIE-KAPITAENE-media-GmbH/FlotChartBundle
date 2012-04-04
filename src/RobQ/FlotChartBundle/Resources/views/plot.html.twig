@@ -1,97 +1,31 @@
-<script type="text/javascript">
-    $(function () {
+<!-- javascript -->
+{% javascripts
+        'bundles/flotchart/js/*.js'
+    %}
+<script src="{{ asset_url }}" type="text/javascript"></script>
+{% endjavascripts %}
 
-        var placeholder = $("#{{placeholder}}");
-        var placeholder_over = $("#{{placeholder}}_overview");
-        var placeholder_legend = $("#{{placeholder}}_legend");
+{% set dim = "" %}
+{% for bez,val in dimensions|default() %}
+    {% set dim = bez~":"~val~"px;" %}
+{% else %}
+    {% set dim = "width:900px; height:500px;" %}
+{% endfor %}
 
-        var plot;
-        var overview_plot;
-
-        var rawdata = {{data|raw}};
-
-        var rawoptions = {% if extendedOptions %}$.extend(true, {}, {% if options %}{{options|raw}}{% endif %}, {
-            {{extendedOptions|raw}}
-        }){% else %}{% endif %};
-
-        var selectoptions = rawoptions;
-
-        var previousPoint = new Array();
-        var i = 0;
-
-        {% for event,function in events %}
-        placeholder.bind('{{event}}', {{function}});
-        {% endfor %}
-
-        $.each(rawdata, function (key, val) {
-
-            val.color = i;
-            l = val.label;
-
-            var div = $('<div/>').appendTo(placeholder_legend);
-            var checked = '';
-            if (i < 6) checked = 'checked="checked"';
-
-            $('<input style="display:inline;" name="' + l + '" id="' + l + '" type="checkbox" ' + checked + ' />').appendTo(div);
-            $('<label style="margin-left:5px; display:inline;" for="' + l + '" >' + l + '</label>').appendTo(div);
-
-            ++i;
-        });
-
-        {% if plugins %}
-            {% for name,code in plugins %}
-            {{code|raw}}
-            {% endfor %}
-        {% endif %}
-
-        placeholder_legend.find("input").change(plotAccordingToChoices);
-
-        function plotAccordingToChoices(e) {
-            plotChart(selectoptions);
-        }
-
-        function plotChart(options) {
-            var data = [];
-
-            placeholder_legend.find("input:checked").each(function () {
-                var key = this.name;
-
-                for (var i = 0; i < rawdata.length; i++) {
-                    if (rawdata[i].label === key) {
-                        data.push(rawdata[i]);
-                        return true;
-                    }
-                }
-            });
-
-            if (!options) {
-                options = rawoptions;
-            }
-
-            // Chart
-            plot = $.plot(placeholder, data, options);
-
-            // Overview
-            overview_plot = $.plot(placeholder_over, data,
-                    {
-                        series:{
-                            lines:{ show:true, lineWidth:1 },
-                            shadowSize:0
-                        },
-                        xaxis:{ ticks:[], mode:"time" },
-                        yaxis:{ ticks:[], autoscaleMargin:0.1 },
-                        selection:{ mode:"xy" },
-                        legend:{ show:false }
-                    }
-            );
-        }
-
-        plotChart();
-
-    });
-</script>
-<div id="chart_{{placeholder}}">
-    <div id="{{placeholder}}" style="float:left; width:900px; height:500px"></div>
+<div id="chart_{{placeholder}}" style="clear:both;">
+    <div style="float:left;">
+        <div id="{{placeholder}}" style="{{dim}}"></div>
+        <div id="{{placeholder}}_overview" style="margin-top:20px; margin-left:150px;  width:600px; height:80px"></div>
+    </div>
     <div id="{{placeholder}}_legend" style="float:left; margin-left: 20px;"></div>
-    <div id="{{placeholder}}_overview" style="clear:both; margin-top:20px; margin-left:150px;  width:600px; height:80px"></div>
 </div>
+
+<script type="text/javascript">
+    {{placeholder}}_fp = new FlotPlot('{{placeholder}}', {{data|raw}}, {{options|raw}}, {{events|raw}}, {{overview}}, {{choiceLegend}}, {{choiceLegendFormatter|raw}});
+    {{placeholder}}_fp.plotChart();
+</script>
+
+
+
+
+

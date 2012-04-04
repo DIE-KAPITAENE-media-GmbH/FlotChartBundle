@@ -25,9 +25,29 @@ class DefaultChart implements DefaultChartInterface {
     protected $options;
 
     /**
+     * @var bool
+     */
+    protected $overview=false;
+
+    /**
+     * @var bool
+     */
+    protected $choiceLegend=false;
+
+    /**
+     * @var
+     */
+    protected $choiceLegendFormatter;
+
+    /**
      * @var array
      */
     protected $plugins=array();
+
+    /**
+     * @var array
+     */
+    protected $dimensions=array();
 
     /**
      * @return string
@@ -94,5 +114,61 @@ class DefaultChart implements DefaultChartInterface {
      */
     public function setPlugins($plugins) {
         $this->plugins = $plugins;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDimensions() {
+        return $this->dimensions;
+    }
+
+    /**
+     * @param array $dimensions
+     */
+    public function setDimensions($dimensions) {
+        $this->dimensions = $dimensions;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getChoiceLegend() {
+        return $this->choiceLegend;
+    }
+
+    /**
+     * @param boolean $choiceLegend
+     */
+    public function setChoiceLegend($choiceLegend) {
+        $this->choiceLegend = $choiceLegend;
+    }
+
+    /**
+     * @return
+     */
+    public function getChoiceLegendFormatter() {
+        return $this->choiceLegendFormatter;
+    }
+
+    /**
+     * @param  $choiceLegendFormatter
+     */
+    public function setChoiceLegendFormatter($choiceLegendFormatter) {
+        $this->choiceLegendFormatter = $choiceLegendFormatter;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getOverview() {
+        return $this->overview;
+    }
+
+    /**
+     * @param boolean $overview
+     */
+    public function setOverview($overview) {
+        $this->overview = $overview;
     }
 }

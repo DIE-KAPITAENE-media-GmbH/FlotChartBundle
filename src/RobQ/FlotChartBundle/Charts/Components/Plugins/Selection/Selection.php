@@ -17,7 +17,6 @@ class Selection extends PluginExtends implements PluginInterface {
      */
     private $color = "#e8cfac";
 
-
     /**
      * @return null
      */
@@ -57,6 +56,12 @@ class Selection extends PluginExtends implements PluginInterface {
                 $array[$key] = is_object($value) ? $value->toArray() : $value;
             }
         }
-        return array($this->getName()=>$array);
+        return array( $this->getName()=> $array );
+    }
+
+    public function getEvents() {
+        return array( "plot"             => array( "plotselected" => "self.plotselected" ),
+                      "overview"         => array( "plotselected" => "self.plotselected_overview",
+                                                   "dblclick"     => "self.plotselected_dblclick_overview" ) );
     }
 }
