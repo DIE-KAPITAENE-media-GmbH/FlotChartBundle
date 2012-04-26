@@ -12,6 +12,7 @@
                 <argument key="bar" type="service" id="robq_flotchart.barchart" />
                 <argument key="point" type="service" id="robq_flotchart.pointchart" />
             </argument>
+            <argument type="service" id="service_container" />
         </service>
 
         <service id="robq_flotchart.linechart" class="RobQ\FlotChartBundle\Charts\LineChart" />

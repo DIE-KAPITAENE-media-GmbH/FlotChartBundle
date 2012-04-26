@@ -1,30 +1,59 @@
-<!-- javascript -->
-{% javascripts
-        'bundles/flotchart/js/*.js'
-    %}
-<script src="{{ asset_url }}" type="text/javascript"></script>
-{% endjavascripts %}
-
 {% set dim = "" %}
 {% for bez,val in dimensions|default() %}
-    {% set dim = bez~":"~val~"px;" %}
+{% set dim = dim~bez~":"~val~"px;" %}
 {% else %}
-    {% set dim = "width:900px; height:500px;" %}
+{% set dim = "width:900px; height:500px;" %}
 {% endfor %}
 
-<div id="chart_{{placeholder}}" style="clear:both;">
-    <div style="float:left;">
-        <div id="{{placeholder}}" style="{{dim}}"></div>
-        <div id="{{placeholder}}_overview" style="margin-top:20px; margin-left:150px;  width:600px; height:80px"></div>
+{% if part == "placeholder" %}
+
+    <div id="chart_{{placeholder}}" style="clear:both;">
+        <div style="float:left;">
+            <div id="{{placeholder}}" style="{{dim}}"></div>
+            {% if overview=="true" %}  <div id="{{placeholder}}_overview" style="margin-top:20px; margin-left:150px;  width:600px; height:80px"></div>{% endif %}
+        </div>
+        <div id="{{placeholder}}_legend" style="float:left; margin-left: 20px;"></div>
     </div>
-    <div id="{{placeholder}}_legend" style="float:left; margin-left: 20px;"></div>
-</div>
 
-<script type="text/javascript">
-    {{placeholder}}_fp = new FlotPlot('{{placeholder}}', {{data|raw}}, {{options|raw}}, {{events|raw}}, {{overview}}, {{choiceLegend}}, {{choiceLegendFormatter|raw}});
-    {{placeholder}}_fp.plotChart();
-</script>
+{% elseif part == "js" %}
 
+    <script type="text/javascript">
+        {{placeholder}}_fp = new FlotPlot('{{placeholder}}', {{data|raw}}, {{options|raw}}, {{events|raw}}, {{overview}}, {{choiceLegend}}, {{choiceLegendFormatter|raw}});
+        {{placeholder}}_fp.plotChart();
+    </script>
+
+{% elseif part == "flotplot" %}
+
+    <!-- javascript -->
+    {% javascripts
+            'bundles/flotchart/js/*.js'
+        %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+    {% endjavascripts %}
+
+{% else %}
+
+    <!-- javascript -->
+    {% javascripts
+            'bundles/flotchart/js/*.js'
+        %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+    {% endjavascripts %}
+
+    <div id="chart_{{placeholder}}" style="clear:both;">
+        <div style="float:left;">
+            <div id="{{placeholder}}" style="{{dim}}"></div>
+            {% if overview=="true" %} <div id="{{placeholder}}_overview" style="margin-top:20px; margin-left:150px;  width:600px; height:80px"></div>{% endif %}
+        </div>
+        <div id="{{placeholder}}_legend" style="float:left; margin-left: 20px;"></div>
+    </div>
+
+    <script type="text/javascript">
+        {{placeholder}}_fp = new FlotPlot('{{placeholder}}', {{data|raw}}, {{options|raw}}, {{events|raw}}, {{overview}}, {{choiceLegend}}, {{choiceLegendFormatter|raw}});
+        {{placeholder}}_fp.plotChart();
+    </script>
+
+{% endif %}
 
 
 

@@ -28,11 +28,11 @@ $.extend(FlotPlot.prototype, {
         this.choiceLegend = legend;
         this.choiceLegendFormatter = legendFormatter;
 
-        if (options.xaxis.tickFormatter) {
+        if (options.xaxis && options.xaxis.tickFormatter) {
             options.xaxis.tickFormatter = eval(options.xaxis.tickFormatter);
         }
 
-        if (options.yaxis.tickFormatter) {
+        if (options.yaxis && options.yaxis.tickFormatter) {
             options.yaxis.tickFormatter = eval(options.yaxis.tickFormatter);
         }
 

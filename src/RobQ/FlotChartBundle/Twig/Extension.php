@@ -25,7 +25,7 @@ class Extension extends \Twig_Extension {
         return 'robq_flotchart';
     }
 
-    public function create($chartObj) {
+    public function create($chartObj, $part = false) {
 
         if( !$chartObj instanceof DefaultChartInterface ) {
             return "no ChartObject given!";
@@ -72,6 +72,7 @@ class Extension extends \Twig_Extension {
                                                                          "dimensions"            => $chartObj->getDimensions(),
                                                                          "overview"              => $chartObj->getOverview() ? "true" : "false",
                                                                          "choiceLegend"          => $chartObj->getChoiceLegend() ? "true" : "false",
-                                                                         "choiceLegendFormatter" => $chartObj->getChoiceLegendFormatter() ? $chartObj->getChoiceLegendFormatter() : "''" ));
+                                                                         "choiceLegendFormatter" => $chartObj->getChoiceLegendFormatter() ? $chartObj->getChoiceLegendFormatter() : "''",
+                                                                         "part"                  => $part ));
     }
 }
