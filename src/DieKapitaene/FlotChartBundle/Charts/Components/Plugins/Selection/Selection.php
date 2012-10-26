@@ -18,6 +18,17 @@ class Selection extends PluginExtends implements PluginInterface {
     private $color = "#e8cfac";
 
     /**
+     * @var array
+     */
+    private $plotEvents = array( "plotselected" => "self.plotselected" );
+
+    /**
+     * @var array
+     */
+    private $overviewEvents = array( "plotselected" => "self.plotselected_overview",
+                                     "dblclick"     => "self.plotselected_dblclick_overview" );
+
+    /**
      * @return null
      */
     public function getMode() {
@@ -29,6 +40,34 @@ class Selection extends PluginExtends implements PluginInterface {
      */
     public function setMode($mode) {
         $this->mode = $mode;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPlotEvents() {
+        return $this->plotEvents;
+    }
+
+    /**
+     * @param array $events
+     */
+    public function setPlotEvents($events) {
+        $this->plotEvents = $events;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOverviewEvents() {
+        return $this->overviewEvents;
+    }
+
+    /**
+     * @param array $events
+     */
+    public function setOverviewEvents($events) {
+        $this->overviewEvents = $events;
     }
 
     /**
@@ -60,8 +99,7 @@ class Selection extends PluginExtends implements PluginInterface {
     }
 
     public function getEvents() {
-        return array( "plot"             => array( "plotselected" => "self.plotselected" ),
-                      "overview"         => array( "plotselected" => "self.plotselected_overview",
-                                                   "dblclick"     => "self.plotselected_dblclick_overview" ) );
+        return array( "plot"             => $this->getPlotEvents(),
+                      "overview"         => $this->getOverviewEvents() );
     }
 }
