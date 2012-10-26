@@ -8,9 +8,9 @@
 
 		<service id="diekapitaene_flotchart.creator" class="DieKapitaene\FlotChartBundle\Creator\ChartDataCreator">
             <argument type="collection">
-                <argument key="line" type="service" id="robq_flotchart.linechart" />
-                <argument key="bar" type="service" id="robq_flotchart.barchart" />
-                <argument key="point" type="service" id="robq_flotchart.pointchart" />
+                <argument key="line" type="service" id="diekapitaene_flotchart.linechart" />
+                <argument key="bar" type="service" id="diekapitaene_flotchart.barchart" />
+                <argument key="point" type="service" id="diekapitaene_flotchart.pointchart" />
             </argument>
             <argument type="service" id="service_container" />
         </service>
