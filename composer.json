@@ -1,7 +1,7 @@
 {
   "name": "diekapitaene/flotchartbundle",
   "description": "Chart-Bundle for Flot js Framework",
-  "homepage": "https://github.com/Rob-Q/FlotChartBundle",
+  "homepage": "https://github.com/DIE-KAPITAENE-media-GmbH/FlotChartBundle",
   "type": "library",
   "license": "MIT",
   "authors": [
