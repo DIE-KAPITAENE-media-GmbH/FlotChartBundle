@@ -18,12 +18,21 @@ class Extension extends \Twig_Extension {
     }
 
     public function getFunctions() {
-        return array( 'flotchart' => new \Twig_Function_Method($this, 'create', array( 'is_safe' => array( 'html' ) )), );
+        return array( 
+            'flotchart' => new \Twig_Function_Method($this, 'create', array( 'is_safe' => array( 'html' ) )), 
+            'flotchart_script' => new \Twig_Function_Method($this, 'insertScript', array( 'is_safe' => array( 'html' ) )), 
+        );
     }
 
     public function getName() {
         return 'robq_flotchart';
     }
+
+    public function insertScript() {
+        $engine = $this->container->get('templating');
+        return $engine->render('FlotChartBundle::script.html.twig', array());
+    }
+
 
     public function create($chartObj, $part = false) {
 

@@ -18,28 +18,30 @@
 {% elseif part == "js" %}
 
     <script type="text/javascript">
+    $(document).ready(function(){
         {{placeholder}}_fp = new FlotPlot('{{placeholder}}', {{data|raw}}, {{options|raw}}, {{events|raw}}, {{overview}}, {{choiceLegend}}, {{choiceLegendFormatter|raw}});
         {{placeholder}}_fp.plotChart();
+    });
     </script>
 
 {% elseif part == "flotplot" %}
 
     <!-- javascript -->
-    {% javascripts
+    {#% javascripts
             'bundles/flotchart/js/*.js'
         %}
     <script src="{{ asset_url }}" type="text/javascript"></script>
     {% endjavascripts %}
-
+#}
 {% else %}
 
     <!-- javascript -->
-    {% javascripts
+    {#% javascripts
             'bundles/flotchart/js/*.js'
         %}
     <script src="{{ asset_url }}" type="text/javascript"></script>
     {% endjavascripts %}
-
+#}
     <div id="chart_{{placeholder}}" style="clear:both;">
         <div style="float:left;">
             <div id="{{placeholder}}" style="{{dim}}"></div>
@@ -49,8 +51,10 @@
     </div>
 
     <script type="text/javascript">
+    $(document).ready(function(){
         {{placeholder}}_fp = new FlotPlot('{{placeholder}}', {{data|raw}}, {{options|raw}}, {{events|raw}}, {{overview}}, {{choiceLegend}}, {{choiceLegendFormatter|raw}});
         {{placeholder}}_fp.plotChart();
+    });
     </script>
 
 {% endif %}
